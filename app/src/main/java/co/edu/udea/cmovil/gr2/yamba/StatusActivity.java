@@ -1,6 +1,8 @@
 package co.edu.udea.cmovil.gr2.yamba;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -15,10 +17,6 @@ import com.thenewcircle.yamba.client.YambaClient;
 public class StatusActivity extends Activity {
 
     private  static  final  String TAG = StatusActivity.class.getSimpleName();
-    private Button mButtonTweet;
-    private EditText mTextStatus;
-    private TextView mTextCount;
-    private int mDefaultColor;
 
 
 
@@ -27,26 +25,16 @@ public class StatusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mButtonTweet=(Button) findViewById(R.id.status_button_tweet);
-        mTextStatus=(EditText) findViewById(R.id.status_text);
-        mTextCount=(TextView) findViewById(R.id.status_text_count);
-
-        mTextCount.setText(Integer.toString(140));
-        mDefaultColor=mTextCount.getTextColors().getDefaultColor();
-
-        mButtonTweet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String status=mTextStatus.getText().toString();
-                PostTask postTask= new PostTask(TAG,StatusActivity.this);
-                postTask.execute(status);
-                Log.d(TAG, "onClicked");
+        if (savedInstanceState == null) {
+            // Create a fragment
+            StatusFragment fragment = new StatusFragment();
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(android.R.id.content, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.commit();
 
 
-            }
-        });
-
+        }
     }
 
     @Override
