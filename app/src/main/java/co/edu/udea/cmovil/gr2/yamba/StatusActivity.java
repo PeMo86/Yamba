@@ -1,18 +1,10 @@
 package co.edu.udea.cmovil.gr2.yamba;
 
 import android.app.Activity;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
-
-import com.thenewcircle.yamba.client.YambaClient;
 
 public class StatusActivity extends Activity {
 
@@ -25,16 +17,17 @@ public class StatusActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.i("StatusActivity","SavedInstance : "  + savedInstanceState);
+/*
         if (savedInstanceState == null) {
             // Create a fragment
             StatusFragment fragment = new StatusFragment();
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(android.R.id.content, fragment, fragment.getClass().getSimpleName());
+            fragmentTransaction.add(android.R.id.content, fragment);
             fragmentTransaction.commit();
-
-
         }
+*/
     }
 
     @Override

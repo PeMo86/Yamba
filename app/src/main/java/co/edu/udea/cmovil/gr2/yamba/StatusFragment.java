@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.preference.PreferenceManager;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -53,9 +54,13 @@ public class StatusFragment extends Fragment {
                 InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(mTextStatus.getWindowToken(), 0);
                 String status = mTextStatus.getText().toString();
-                PostTask postTask = new PostTask();
-                postTask.execute(status);
-                Log.d(TAG, "onClicked");
+                if (TextUtils.isEmpty(status)) {
+                    Toast.makeText(getActivity(), "No has escrito nada para publicar...", Toast.LENGTH_LONG).show();
+                } else {
+                    PostTask postTask = new PostTask();
+                    postTask.execute(status);
+                    Log.d(TAG, "onClicked");
+                }
             }
         });
 
